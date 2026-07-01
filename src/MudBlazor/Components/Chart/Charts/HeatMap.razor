@@ -1,4 +1,5 @@
 ﻿@namespace MudBlazor.Charts
+@using System.Net
 
 @inherits MudChartBase<T, HeatMapChartOptions>
 
@@ -187,13 +188,13 @@
         if (_options?.YAxisLabelPosition == YAxisLabelPosition.Left)
         {
             <g transform="translate(@((_horizontalStartSpace - CellPadding).ToStr()), @((y + _cellDimension.Height / 2).ToStr()))">
-                @((MarkupString)$"<text class='mud-charts-yaxis' x='{-AxisLabelsPadding}' y='0' dominant-baseline='middle' text-anchor='end' font-size='{_dynamicFontSize.ToStr()}'>{rowLabel}</text>")
+                @((MarkupString)$"<text class='mud-charts-yaxis' x='{-AxisLabelsPadding}' y='0' dominant-baseline='middle' text-anchor='end' font-size='{_dynamicFontSize.ToStr()}'>{WebUtility.HtmlEncode(rowLabel)}</text>")
             </g>
         }
         else if (_options?.YAxisLabelPosition == YAxisLabelPosition.Right)
         {
             <g transform="translate(@((_horizontalStartSpace + HeatmapWidth + CellPadding).ToStr()), @((y + _cellDimension.Height / 2).ToStr()))">
-                @((MarkupString)$"<text class='mud-charts-yaxis' x='{AxisLabelsPadding}' y='0' dominant-baseline='middle' text-anchor='start' font-size='{_dynamicFontSize.ToStr()}'>{rowLabel}</text>")
+                @((MarkupString)$"<text class='mud-charts-yaxis' x='{AxisLabelsPadding}' y='0' dominant-baseline='middle' text-anchor='start' font-size='{_dynamicFontSize.ToStr()}'>{WebUtility.HtmlEncode(rowLabel)}</text>")
             </g>
         }
     }
@@ -250,7 +251,7 @@
                                       y2="@y2.ToStr()"
                                       stroke-width="1"/>
                                 var y3 = y2 + (_legendPosition == Position.Top ? -LegendLineLength : LegendLineLength);
-                                @((MarkupString)@$"<text x='0' y='{y3.ToStr()}' dominant-baseline='middle' text-anchor='start' font-size='{labelFontSize}'>{FormatValueForDisplay(_legends[i].value)}</text>")
+                                @((MarkupString)@$"<text x='0' y='{y3.ToStr()}' dominant-baseline='middle' text-anchor='start' font-size='{labelFontSize}'>{WebUtility.HtmlEncode(FormatValueForDisplay(_legends[i].value))}</text>")
                             }
                         </g>
                     }
@@ -312,7 +313,7 @@
                                       y2="@y2.ToStr()"
                                       stroke-width="1"/>
 
-                                @((MarkupString)@$"<text x='{x3.ToStr()}' y='0' dominant-baseline='middle' text-anchor='{(_legendPosition == Position.Right ? "start" : "end")}' font-size='{labelFontSize}'>{FormatValueForDisplay(_legends[i].value)}</text>")
+                                @((MarkupString)@$"<text x='{x3.ToStr()}' y='0' dominant-baseline='middle' text-anchor='{(_legendPosition == Position.Right ? "start" : "end")}' font-size='{labelFontSize}'>{WebUtility.HtmlEncode(FormatValueForDisplay(_legends[i].value))}</text>")
                             }
                         </g>
                     }

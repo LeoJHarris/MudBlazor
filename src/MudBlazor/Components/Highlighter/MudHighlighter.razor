@@ -16,8 +16,8 @@
             {
                 case FragmentType.HighlightedText:
                     var attributes = RenderAttributes(UserAttributes);
-                    var classNames = string.IsNullOrWhiteSpace(Class) ? string.Empty : $" class=\"{Class}\" ";
-                    var styles = string.IsNullOrWhiteSpace(Style) ? string.Empty : $" style=\"{Style}\" ";
+                    var classNames = string.IsNullOrWhiteSpace(Class) ? string.Empty : $" class=\"{WebUtility.HtmlEncode(Class)}\" ";
+                    var styles = string.IsNullOrWhiteSpace(Style) ? string.Empty : $" style=\"{WebUtility.HtmlEncode(Style)}\" ";
                     sb.Append($"<mark{classNames}{styles}{attributes}>{WebUtility.HtmlEncode(fragmentInfo.Content)}</mark>");
                     break;
                 case FragmentType.Markup:
